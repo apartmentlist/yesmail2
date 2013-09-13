@@ -2,6 +2,7 @@ module Yesmail2
 
 end
 
+
 require 'yesmail/config'
 require 'yesmail/api_base'
 require 'yesmail/email'

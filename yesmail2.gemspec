@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "Ruby wrapper for v2 of the yesmail API"
   s.authors     = ["ApartmentList"]
   s.email       = 'alan@autolist.com'
-  s.files       = ["lib/yesmail2.rb"]
+  s.files       = Dir["lib/**/*.rb"]
   s.require_paths = ['lib']
   s.homepage      = 'https://github.com/apartmentlist/yesmail2'
 end
