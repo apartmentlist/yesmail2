@@ -1,3 +1,7 @@
+require 'hashie'
+require 'json'
+require 'rest_client'
+
 module Yesmail2
   class ApiBase
     require_relative 'logging'

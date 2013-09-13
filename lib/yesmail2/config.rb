@@ -1,3 +1,5 @@
+require 'hashie'
+require 'logger'
 
 module Yesmail2
   def self.config
