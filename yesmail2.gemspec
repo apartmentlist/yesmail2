@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.homepage      = 'https://github.com/apartmentlist/yesmail2'
  
-  gem.add_dependency 'rest-client'
-  gem.add_dependency 'json'
-  gem.add_dependency 'logger'
-  gem.add_dependency 'hashie'
-  gem.add_development_dependency 'pp'
-  gem.add_development_dependency 'pry'
+  s.add_dependency 'rest-client'
+  s.add_dependency 'json'
+  s.add_dependency 'logger'
+  s.add_dependency 'hashie'
+  s.add_development_dependency 'pp'
+  s.add_development_dependency 'pry'
 end
