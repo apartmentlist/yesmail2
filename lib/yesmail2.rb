@@ -1,18 +1,13 @@
+#open the module
 module Yesmail2
 
 end
 
-require 'yesmail/config'
-require 'yesmail/api_base'
-require 'yesmail/email'
-require 'yesmail/logging'
-require 'yesmail/reference_data'
-require 'yesmail/subscriber'
-require 'yesmail/ticket'
-
-## include all the nested files
-#project_root = File.dirname(File.absolute_path(__FILE__))
-#
-#files = ['/api_base.rb', '/config.rb', '/email.rb', '/logging.rb', '/reference_data.rb',
-# '/subscriber.rb', '/ticket.rb', '/yesmail2.rb']
-#files.each {|filename| require project_root + "/#{filename}" }
+# Require files manually in the appropriate order
+require 'yesmail2/config'
+require 'yesmail2/api_base'
+require 'yesmail2/email'
+require 'yesmail2/logging'
+require 'yesmail2/reference_data'
+require 'yesmail2/subscriber'
+require 'yesmail2/ticket'
