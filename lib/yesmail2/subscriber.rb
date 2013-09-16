@@ -1,3 +1,5 @@
+require 'uri'
+
 module Yesmail2
 
   # Note that when the yesmail documentation refers to a subscriber ID, in
