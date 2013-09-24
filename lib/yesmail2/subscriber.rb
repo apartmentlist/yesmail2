@@ -66,6 +66,13 @@ module Yesmail2
       response = get(full_path(email, 'subscriptions'))
     end
 
+    # Sets all of the subscriptions for this user to 'unsubscribed'.  Should
+    # return an empty body if the call is successful.
+    def self.delete_subscriber(email)
+      #DELETE api.yesmail.com/v2/subscribers/{id}/subscriptions
+      response = delete(full_path(email, 'subscriptions'))
+    end
+
     #
     # @param email [String]
     # @param division_name [String]
