@@ -67,7 +67,8 @@ module Yesmail2
     end
 
     # Sets all of the subscriptions for this user to 'unsubscribed'.  Should
-    # return an empty body if the call is successful.
+    # return an empty body if the call is successful.  Note that this doesn't
+    # appear to actually delete a row.  It just unsubscribes.
     def self.delete_subscriber(email)
       #DELETE api.yesmail.com/v2/subscribers/{id}/subscriptions
       response = delete(full_path(email, 'subscriptions'))
