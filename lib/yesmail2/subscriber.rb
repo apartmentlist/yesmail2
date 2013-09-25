@@ -146,7 +146,7 @@ module Yesmail2
     # @param resubscribe [TrueClass, FalseClass] specifies whether if one of
     #   the users already exists and has been marked as unsubscribed, should
     #   this attempt to resubscribe them still work?
-    def self.update_subscribers(subscribers, divisions,
+    def self.update_subscribers(subscribers, divisions, subscriptions = [],
         existing_subscribers = 'update', resubscribe = false)
 
       divisions = [divisions] if divisions.is_a?(String)
@@ -157,6 +157,10 @@ module Yesmail2
         :memberOf => divisions,
         :subscribers => subscribers
       }
+
+      unless subscriptions.empty?
+        data[:subscriptions] = { :memberOf => subscriptions }
+      end
 
       #POST subscribers/import
       post(full_path('import'), data.to_json, :content_type => :json, :accept => :json)
