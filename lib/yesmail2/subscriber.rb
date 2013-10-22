@@ -161,7 +161,7 @@ module Yesmail2
 
       data = {
         :existingSubscribers => existing_subscribers,
-        :resubscribe => true,
+        :resubscribe => resubscribe,
         :memberOf => divisions,
         :subscribers => subscribers
       }
