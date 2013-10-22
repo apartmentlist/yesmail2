@@ -1,6 +1,10 @@
 Gem::Specification.new do |s|
   s.name        = 'yesmail2'
+<<<<<<< HEAD
+  s.version     = '0.0.3'
+=======
   s.version     = '0.0.4'
+>>>>>>> Add subscriptions argument to Subscriber.import
   s.date        = '2013-09-12'
   s.summary     = "Yesmail v2"
   s.description = "Ruby wrapper for v2 of the yesmail API"
