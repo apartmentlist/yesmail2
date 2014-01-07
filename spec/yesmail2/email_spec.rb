@@ -7,13 +7,16 @@ module Yesmail2
       end
 
       it 'invokes the correct shit' do
-        body = { content: [template_id], recipients: [subscriber] }
+        body = {
+          content: { templateId: template_id },
+          recipients: [subscriber]
+        }
         WebMock
           .stub_request(:post, 'https://api.yesmail.com/v2/emails/send')
           .with(body: body.to_json)
           .to_return(status: 200, body: '{}')
 
-        Email.send([template_id], [subscriber])
+        Email.send({ templateId: template_id }, [subscriber])
       end
     end
   end
