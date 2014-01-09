@@ -24,6 +24,39 @@ module Yesmail2
 
         ApiBase.http_method(:get, url)
       end
+
+      it 'returns a Hashie::Mash representing the JSON response' do
+        WebMock.stub_request(:get, url)
+          .to_return(status: 200, body: '{"foo":"bar","biz":3}')
+
+        result = ApiBase.http_method(:get, url)
+        result.should be_a(Hashie::Mash)
+        result.foo.should eq('bar')
+        result.biz.should eq(3)
+      end
+
+      context 'when the response code is 202' do
+        it 'returns a Hashie::Mash representing the JSON response' do
+          WebMock.stub_request(:get, url)
+            .to_return(status: 202, body: '{"foo":"bar","biz":3}')
+
+          result = ApiBase.http_method(:get, url)
+          result.should be_a(Hashie::Mash)
+          result.foo.should eq('bar')
+          result.biz.should eq(3)
+        end
+      end
+
+      context 'when the response body is empty' do
+        before do
+          WebMock.stub_request(:get, url)
+            .to_return(status: 200, body: '')
+        end
+
+        it 'returns a Hashie for a blank response' do
+          ApiBase.http_method(:get, url).should be_a(Hashie::Mash)
+        end
+      end
     end
   end
 end
