@@ -72,30 +72,33 @@ module Yesmail2
       _args = extra_args.dup
       _args[1] = _args[1].dup
 
-      r = RestClient.send(method, *_args) do |response, request, result, &block|
-        # Look for any successful response code: 2XX
-        if response.code.to_s =~ /2../
-          # In some cases, Yesmail's response is an empty string, which is not
-          # valid JSON, just pretend we got an empty hash so we can pass that
-          # to Hashie with no issues.
-          hash = response == '' ? {} : JSON.parse(response)
-          r = Hashie::Mash.new(hash)
-          log_request(request)
-          log_response(response)
-          r
-        else
-          if response.code == 401 && tries < Yesmail2.config.retries
-            puts "Unauthorized.  Retrying attempt #{tries}"
-            try_http_method(method, tries + 1, *extra_args)
-          else
+      RestClient.send(method, *_args) do |response, request, result, &block|
+        hash = response == '' ? {} : JSON.parse(response)
+        Hashie::Mash.new(hash).tap do |r|
+          # Look for any successful response code: 2XX
+          if response.code.to_s =~ /2../
+            # In some cases, Yesmail's response is an empty string, which is not
+            # valid JSON, just pretend we got an empty hash so we can pass that
+            # to Hashie with no issues.
             log_request(request)
             log_response(response)
-            response.return!(request, result, &block)
+          else
+            if response.code == 401 && tries < Yesmail2.config.retries
+              puts "Unauthorized.  Retrying attempt #{tries}"
+              try_http_method(method, tries + 1, *extra_args)
+            else
+              log_request(request)
+              log_response(response)
+              response.return!(request, result, &block)
+            end
           end
+
+          # For some reason `response` is a string but not really
+          # consumers of this method would welcome the knowledge of the http
+          # code associated with this call, so we add it all terrible.
+          r.code = response.code
         end
       end
-
-      r
     end
 
     def self.log_request(request)

@@ -2,6 +2,8 @@
 *.rbc
 .bundle
 .config
+.ruby-*
+.idea/
 coverage
 InstalledFiles
 lib/bundler/man
