@@ -155,12 +155,12 @@ module Yesmail2
     #   the users already exists and has been marked as unsubscribed, should
     #   this attempt to resubscribe them still work?
     def self.update_subscribers(subscribers, divisions, subscriptions = [],
-        existing_subscribers = 'update', resubscribe = false)
+        import_type = 'update', resubscribe = false)
 
       divisions = [divisions] if divisions.is_a?(String)
 
       data = {
-        :existingSubscribers => existing_subscribers,
+        :importType => import_type,
         :resubscribe => resubscribe,
         :memberOf => divisions,
         :subscribers => subscribers
