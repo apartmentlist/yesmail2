@@ -73,8 +73,8 @@ module Yesmail2
     # },
     #
     def self.upsert_records(dataset_name, records)
-      #POST reference-data/{dataset}/records/update
-      r = post(full_path(dataset_name, 'records', 'update'), records.to_json, :content_type => :json, :accept => :json)
+      #POST reference-data/{dataset}/records/import
+      r = post(full_path(dataset_name, 'records', 'import'), records.to_json, :content_type => :json, :accept => :json)
     end
 
     # WARN: this code is untested
